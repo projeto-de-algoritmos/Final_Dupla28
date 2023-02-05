@@ -65,5 +65,3 @@ def decompress(filename):
     # Escreve o conteúdo decodificado em um arquivo de texto
     with open(os.path.splitext(filename)[0] + '.txt', 'w') as f:
         f.write(decoded)
-        
-compress('teste.txt')

@@ -7,7 +7,7 @@
 |Matrícula | Aluno |
 | -- | -- |
 | 19/0037997  |  Sidney Fernando F. Lemes |
-| xx/xxxxxx  |  Lucas Gomes Caldas |
+| 21/2005426  |  Lucas Gomes Caldas |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
@@ -16,9 +16,9 @@ Descreva os objetivos do seu projeto e como ele funciona.
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python 3<br>
+- ```$ pip install -r requirements.txt```
+- ```$ streamlit run interface.py``` ou ```$ python -m streamlit run interface.py ```
 
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
