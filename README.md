@@ -7,7 +7,7 @@
 |Matrícula | Aluno |
 | -- | -- |
 | 19/0037997  |  Sidney Fernando F. Lemes |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| xx/xxxxxx  |  Lucas Gomes Caldas |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
