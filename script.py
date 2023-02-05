@@ -1,6 +1,7 @@
 import os
 import heapq
 from collections import defaultdict
+import io
 
 def compress(filename):
     # Lê o conteúdo do arquivo de texto
@@ -32,10 +33,15 @@ def compress(filename):
     # Codifica o conteúdo usando o código de Huffman
     encoded = ''.join([huff[char] for char in content])
 
-    filename = filename[:-4]
+    file = io.StringIO(encoded)
+    
+    return file.getvalue()
+    
+    #filename = filename[:-4]
+    
     # Escreve o conteúdo codificado em um arquivo com extensão .sl28
-    with open(filename + '.sl28', 'w') as f:
-        f.write(encoded)
+    #with open(filename + '.sl28', 'w') as f:
+        #f.write(encoded)
 
 def decompress(filename):
     # Lê o conteúdo codificado do arquivo .sl28
