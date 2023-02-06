@@ -1,5 +1,5 @@
 import streamlit as st
-import script
+import huffman_code
 
 #Title
 st.title('Trabalho final - Dupla 28')
@@ -21,20 +21,20 @@ if uploaded_file:
         with open(uploaded_file.name, 'w') as f:
             f.write(stringio)
 
-        file = script.compress(uploaded_file.name)
-        name = uploaded_file.name.rsplit(".", 1)
-        name[-1] = "sl28"
-        new_filename = ".".join(name)
-        
+        file = huffman_code.compress(uploaded_file.name)
+        #name = uploaded_file.name.rsplit(".", 1)
+        #name[-1] = "sl28"
+        #new_filename = "_".join(name)
         # Adicionar uma opção para baixar o arquivo modificado
         st.markdown("""
         Para baixar o arquivo modificado, clique no botão abaixo:
 
         """)
         st.markdown("""
-        <a href="data:text/plain;charset=utf-8,{}" download="modified_file.txt">
+        <a href="data:text/plain;charset=utf-8,{}" download="compacted_file.sl28">
         Baixa arquivo compactado
         </a>
         """.format(file), unsafe_allow_html=True)
+        
     else:
         pass

@@ -1,73 +1,76 @@
-import os
-import heapq
-from collections import defaultdict
-import io
+from collections import Counter
 
-def compress(filename):
-    # Lê o conteúdo do arquivo de texto
-    with open(filename, 'r') as f:
-        content = f.read()
 
-    # Cria um dicionário com a frequência de cada caractere
-    freq = defaultdict(int)
-    for char in content:
-        freq[char] += 1
+class NodeTree(object):
+    def __init__(self, left=None, right=None):
+        self.left = left
+        self.right = right
 
-    # Cria a árvore de Huffman
-    heap = [[weight, [char, ""]] for char, weight in freq.items()]
-    heapq.heapify(heap)
-    while len(heap) > 1:
-        lo = heapq.heappop(heap)
-        hi = heapq.heappop(heap)
-        for pair in lo[1:]:
-            pair[1] = '0' + pair[1]
-        for pair in hi[1:]:
-            pair[1] = '1' + pair[1]
-        heapq.heappush(heap, [lo[0] + hi[0]] + lo[1:] + hi[1:])
+    def children(self):
+        return self.left, self.right
 
-    # Cria o código de Huffman para cada caractere
-    huff = dict()
-    for char, code in heap[0][1:]:
-        huff[char] = code
+    def __str__(self):
+        return self.left, self.right
 
-    # Codifica o conteúdo usando o código de Huffman
-    encoded = ''.join([huff[char] for char in content])
 
-    file = io.StringIO(encoded)
+def huffman_code_tree(node, binString=''):
+    '''
+    Function to find Huffman Code
+    '''
+    if type(node) is str:
+        return {node: binString}
+    (l, r) = node.children()
+    d = dict()
+    d.update(huffman_code_tree(l, binString + '0'))
+    d.update(huffman_code_tree(r, binString + '1'))
+    return d
+
+
+def make_tree(nodes):
+    '''
+    Function to make tree
+    :param nodes: Nodes
+    :return: Root of the tree
+    '''
+    while len(nodes) > 1:
+        (key1, c1) = nodes[-1]
+        (key2, c2) = nodes[-2]
+        nodes = nodes[:-2]
+        node = NodeTree(key1, key2)
+        nodes.append((node, c1 + c2))
+        nodes = sorted(nodes, key=lambda x: x[1], reverse=True)
+    return nodes[0][0]
+
+
+## DESCOMPACTA
+
+def huffman_decode(encodedString, encodingDict):
+    '''
+    Function to decode Huffman encoded string
+    '''
+    decodedString = ""
+    currentBinString = ""
+    for bit in encodedString:
+        currentBinString += bit
+        for char in encodingDict:
+            if encodingDict[char] == currentBinString:
+                decodedString += char
+                currentBinString = ""
+    return decodedString
+
+
+if __name__ == '__main__':
+    string = 'BCAADDDCCACACAC'
+    #string2 = '1000111110110110100110'
+    freq = dict(Counter(string))
+    freq = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+    node = make_tree(freq)
+    encoding = huffman_code_tree(node)
+    print(encoding)
+    #for i in encoding:
+    #    print(f'{i} : {encoding[i]}')
     
-    return file.getvalue()
-    
-    #filename = filename[:-4]
-    
-    # Escreve o conteúdo codificado em um arquivo com extensão .sl28
-    #with open(filename + '.sl28', 'w') as f:
-        #f.write(encoded)
-
-def decompress(filename):
-    # Lê o conteúdo codificado do arquivo .sl28
-    with open(filename, 'r') as f:
-        encoded = f.read()
-
-    # Cria o dicionário de decodificação a partir do conteúdo codificado
-    decoded = ""
-    code = ""
-    decoder = defaultdict(str)
-    for char in encoded:
-        code += char
-        if code in decoder:
-            decoded += decoder[code]
-            code = ""
-    decoder = {value: key for key, value in decoder.items()}
-
-    # Decodifica o conteúdo
-    i = 0
-    while i < len(encoded):
-        for j in range(i, len(encoded)):
-            if decoder[encoded[i:j+1]] != '':
-                decoded += decoder[encoded[i:j+1]]
-                i = j
-                break
-
-    # Escreve o conteúdo decodificado em um arquivo de texto
-    with open(os.path.splitext(filename)[0] + '.txt', 'w') as f:
-        f.write(decoded)
+    #encodingDict = {'C': '11', 'D': '10', 'A': '0', 'B': '1'}
+    #encodedString = '01110111'
+    #decodedString = huffman_decode(encodedString, encoding)
+    #print(decodedString)
