@@ -33,11 +33,25 @@ def compress(filename):
     # Codifica o conteúdo usando o código de Huffman
     encoded = ''.join([huff[char] for char in content])
     
-    delimiter = ', '
-    sf28_code = delimiter.join("{}: {}".format(key, value) for key, value in huff.items())
+    delimiter = '\n'
+    sf28_code = delimiter.join("{} {}".format(key, value) for key, value in huff.items())
     
-    encoded = encoded + " sl28code:" + sf28_code
+    encoded = encoded + "\nsl28code:\n" + sf28_code
     
     file = io.StringIO(encoded)
     
     return file.getvalue()
+
+def huffman_decode(encodedString, encodingDict):
+    '''
+    Function to decode Huffman encoded string
+    '''
+    decodedString = ""
+    currentBinString = ""
+    for bit in encodedString:
+        currentBinString += bit
+        for char in encodingDict:
+            if encodingDict[char] == currentBinString:
+                decodedString += char
+                currentBinString = ""
+    return decodedString

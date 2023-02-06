@@ -5,25 +5,53 @@ import huffman_code
 st.title('Trabalho final - Dupla 28')
 st.write('Huffman Encoding')
 
-
 st.subheader("O que deseja fazer?")
 opcao = st.radio("", ("Compactar", "Descompactar"))
 
 st.subheader("Selecione um arquivo para compactar")
-uploaded_file = st.file_uploader("Escolha  seu arquivo .txt", type=["txt", "slt28"])
+uploaded_file = st.file_uploader("Escolha  seu arquivo .txt", type=["txt", "sl28"])
 
 if uploaded_file:
     if opcao == "Compactar":
         # To convert to a string based IO:
         stringio = str(uploaded_file.getvalue().decode("utf-8"))
 
+        # Cria um arquivo nesse diretorio com conteúdo do arquivo original
+        with open(uploaded_file.name, 'w') as f:
+            f.write(stringio)
+
         file = huffman_code.compress(uploaded_file.name)
 
-        # Botao para baixar o .txt compactado
+        # Botao para baixar o .sl28
         btn = st.download_button(
                 label="Download Arquivo Compactado",
                 data=file,
                 file_name="compacted_file.sl28"
             )
     else:
-        pass
+
+        stringio = str(uploaded_file.getvalue().decode("utf-8"))
+
+        splitString = stringio.split("\n")
+
+        encodedString = splitString[0]
+
+        encodingDict = splitString[2:]
+
+        newDict = {}
+        for element in encodingDict:
+            print(element.split(" "))
+            if len(element.split(" "))  > 1 and len(element.split(" ")) < 3:
+                newDict[element.split(" ")[0]] = element.split(" ")[1]
+            elif len(element.split(" ")) == 3:
+                newDict[" "] = element.split(" ")[2]
+
+        decodedString = huffman_code.huffman_decode(encodedString, newDict)
+        print(decodedString)
+
+        # Botao para baixar o .txt descompactado
+        btn = st.download_button(
+                label="Download Arquivo Descompactado",
+                data=decodedString,
+                file_name="descompacted_file.txt"
+            )
