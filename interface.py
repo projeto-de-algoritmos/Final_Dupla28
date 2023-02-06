@@ -6,13 +6,13 @@ st.title('Trabalho final - Dupla 28')
 st.write('Huffman Encoding')
 
 st.subheader("O que deseja fazer?")
-opcao = st.radio("", ("Compactar", "Descompactar"))
+opcao = st.radio("", ("Codificar", "Descodificar"))
 
-st.subheader("Selecione um arquivo para compactar")
+st.subheader("Selecione um arquivo")
 uploaded_file = st.file_uploader("Escolha  seu arquivo .txt", type=["txt", "sl28"])
 
 if uploaded_file:
-    if opcao == "Compactar":
+    if opcao == "Codificar":
         # To convert to a string based IO:
         stringio = str(uploaded_file.getvalue().decode("utf-8"))
 
@@ -24,9 +24,9 @@ if uploaded_file:
 
         # Botao para baixar o .sl28
         btn = st.download_button(
-                label="Download Arquivo Compactado",
+                label="Download Arquivo Codificado",
                 data=file,
-                file_name="compacted_file.sl28"
+                file_name="encoded_file.sl28"
             )
     else:
 
@@ -51,7 +51,7 @@ if uploaded_file:
 
         # Botao para baixar o .txt descompactado
         btn = st.download_button(
-                label="Download Arquivo Descompactado",
+                label="Download Arquivo Decodificado",
                 data=decodedString,
-                file_name="descompacted_file.txt"
+                file_name="descodified_file.txt"
             )

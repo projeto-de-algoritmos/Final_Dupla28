@@ -1,4 +1,4 @@
-# NomedoProjeto
+# EncondigText
 
 **Número da Lista**: 28<br>
 **Conteúdo da Disciplina**: Projeto Final<br>
@@ -10,10 +10,13 @@
 | 21/2005426  |  Lucas Gomes Caldas |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+O projeto objetiva apresentar a opção de codificar um texto usando codificação de Huffman e também decodificá-lo 
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+![Screenshot_3](img/Screenshot_2.png)
+![Screenshot_3](img/Screenshot_3.png)
+![Screenshot_3](img/Screenshot_1.png)
 
 ## Instalação 
 **Linguagem**: Python 3<br>
@@ -21,10 +24,8 @@ Adicione 3 ou mais screenshots do projeto em funcionamento.
 - ```$ streamlit run interface.py``` ou ```$ python -m streamlit run interface.py ```
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
-
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+- Selecione "codificar" e coloque um arquivo txt com algo escrito. Faça download do arquivo .sl28 (formato fictício para fim de distinção).
+- Selecione decodificar e coloque um arquivo .sl28. Faça download do arquivo txt com o texto correto
 
 
 
