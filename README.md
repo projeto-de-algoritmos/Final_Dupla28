@@ -27,6 +27,5 @@ O projeto objetiva apresentar a opção de codificar um texto usando codificaç�
 - Selecione "codificar" e coloque um arquivo txt com algo escrito. Faça download do arquivo .sl28 (formato fictício para fim de distinção).
 - Selecione decodificar e coloque um arquivo .sl28. Faça download do arquivo txt com o texto correto
 
-
-
-
+## Apresentação
+[Link Apresentação - Youtube](https://youtu.be/zjLStk-39AA)
